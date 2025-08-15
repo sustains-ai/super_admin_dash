@@ -1,0 +1,312 @@
+.user-management-container {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 20px 0;
+  width: 100%;
+}
+
+.user-management-container .card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.user-management-container .card:hover {
+  transform: translateY(-2px);
+}
+
+.user-management-container .card-header {
+  border-radius: 10px 10px 0 0 !important;
+  border-bottom: none;
+  font-weight: 600;
+  padding: 1rem 1.5rem;
+}
+
+.user-management-container .card-body {
+  padding: 1.5rem;
+}
+
+.user-management-container .table {
+  margin-bottom: 0;
+  width: 100%;
+  min-width: 800px; /* Ensure minimum width for readability */
+}
+
+.user-management-container .table th {
+  border-top: none;
+  font-weight: 600;
+  color: #495057;
+  background-color: #f8f9fa;
+  white-space: nowrap;
+  min-width: 120px;
+  padding: 1rem 0.75rem;
+}
+
+.user-management-container .table td {
+  vertical-align: middle;
+  word-wrap: break-word;
+  max-width: 200px;
+  padding: 1rem 0.75rem;
+}
+
+.user-management-container .badge {
+  font-size: 0.75rem;
+  padding: 0.5em 0.75em;
+  display: inline-block;
+  margin: 0.125rem;
+}
+
+.user-management-container .btn {
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  padding: 0.5rem 1rem;
+}
+
+.user-management-container .btn:hover {
+  transform: translateY(-1px);
+}
+
+.user-management-container .btn-group .btn {
+  margin-right: 0.25rem;
+}
+
+.user-management-container .btn-group .btn:last-child {
+  margin-right: 0;
+}
+
+.user-management-container .table-responsive {
+  border-radius: 8px;
+  overflow: hidden;
+  border: none;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.user-management-container .table-striped > tbody > tr:nth-of-type(odd) > td {
+  background-color: rgba(0, 123, 255, 0.05);
+}
+
+.user-management-container .table-hover > tbody > tr:hover > td {
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+/* Modal styles */
+.user-management-container .modal-header {
+  border-bottom: 1px solid #dee2e6;
+  background-color: #f8f9fa;
+}
+
+.user-management-container .modal-footer {
+  border-top: 1px solid #dee2e6;
+  background-color: #f8f9fa;
+}
+
+.user-management-container .form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.user-management-container .form-select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* 15" Laptop and larger screens */
+@media (min-width: 1366px) {
+  .user-management-container {
+    padding: 30px 0;
+  }
+  
+  .user-management-container .card {
+    margin-bottom: 2rem;
+  }
+  
+  .user-management-container .card-body {
+    padding: 2rem;
+  }
+  
+  .user-management-container .table-responsive {
+    font-size: 0.9rem;
+  }
+  
+  .user-management-container .table th,
+  .user-management-container .table td {
+    padding: 1.25rem 1rem;
+  }
+  
+  .user-management-container .btn {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+  }
+}
+
+/* Large desktop screens */
+@media (min-width: 1920px) {
+  .user-management-container .card-body {
+    padding: 2.5rem;
+  }
+  
+  .user-management-container .table-responsive {
+    font-size: 1rem;
+  }
+  
+  .user-management-container .table th,
+  .user-management-container .table td {
+    padding: 1.5rem 1.25rem;
+  }
+  
+  .user-management-container .btn {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+/* Medium screens (tablets) */
+@media (max-width: 1024px) {
+  .user-management-container .card-body {
+    padding: 1.25rem;
+  }
+  
+  .user-management-container .table-responsive {
+    font-size: 0.875rem;
+  }
+  
+  .user-management-container .table th,
+  .user-management-container .table td {
+    padding: 0.75rem 0.5rem;
+  }
+  
+  .user-management-container .btn {
+    font-size: 0.875rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+/* Mobile responsive fixes */
+@media (max-width: 768px) {
+  .user-management-container {
+    padding: 15px 0;
+  }
+  
+  .user-management-container .table-responsive {
+    font-size: 0.75rem;
+  }
+  
+  .user-management-container .table th,
+  .user-management-container .table td {
+    padding: 0.5rem 0.25rem;
+    font-size: 0.75rem;
+  }
+  
+  .user-management-container .badge {
+    font-size: 0.65rem;
+    padding: 0.25em 0.5em;
+  }
+  
+  .user-management-container .btn {
+    font-size: 0.75rem;
+    padding: 0.375rem 0.75rem;
+  }
+  
+  .user-management-container .btn-group {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .user-management-container .btn-group .btn {
+    margin-bottom: 0.25rem;
+    margin-right: 0;
+  }
+  
+  .user-management-container .card-body {
+    padding: 1rem;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 576px) {
+  .user-management-container .table-responsive {
+    font-size: 0.7rem;
+  }
+  
+  .user-management-container .table th,
+  .user-management-container .table td {
+    padding: 0.25rem 0.125rem;
+    font-size: 0.7rem;
+  }
+  
+  .user-management-container .badge {
+    font-size: 0.6rem;
+    padding: 0.2em 0.4em;
+  }
+  
+  .user-management-container .btn {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+  }
+  
+  .user-management-container .card-header h5 {
+    font-size: 1rem;
+  }
+  
+  .user-management-container .card-body {
+    padding: 0.75rem;
+  }
+}
+
+/* Better spacing for mobile */
+@media (max-width: 768px) {
+  .user-management-container .mt-4 {
+    margin-top: 1rem !important;
+  }
+  
+  .user-management-container .mb-4 {
+    margin-bottom: 1rem !important;
+  }
+  
+  .user-management-container .mb-2 {
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .user-management-container .me-2 {
+    margin-right: 0.5rem !important;
+  }
+  
+  .user-management-container .card {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Fix for long screens - prevent excessive stretching */
+@media (min-height: 900px) {
+  .user-management-container {
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+}
+
+/* Custom scrollbar for table */
+.user-management-container .table-responsive::-webkit-scrollbar {
+  height: 8px;
+}
+
+.user-management-container .table-responsive::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.user-management-container .table-responsive::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.user-management-container .table-responsive::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

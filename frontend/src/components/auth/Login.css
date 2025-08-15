@@ -1,0 +1,172 @@
+.login-container {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.login-card {
+  border: none;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+  min-width: 320px;
+}
+
+.login-card .card-body {
+  border-radius: 15px;
+  padding: 2rem;
+}
+
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #e1e5e9;
+  padding: 12px 15px;
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:disabled {
+  transform: none;
+  box-shadow: none;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 8px;
+}
+
+.alert {
+  border-radius: 8px;
+  border: none;
+}
+
+.text-primary {
+  color: #667eea !important;
+}
+
+.fw-bold {
+  font-weight: 700 !important;
+}
+
+.shadow {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Mobile responsive fixes */
+@media (max-width: 576px) {
+  .login-container {
+    padding: 10px;
+  }
+  
+  .login-card .card-body {
+    padding: 1.5rem;
+  }
+  
+  .min-vh-100 {
+    min-height: 100vh !important;
+  }
+  
+  .justify-content-center {
+    justify-content: center !important;
+  }
+  
+  .align-items-center {
+    align-items: center !important;
+  }
+}
+
+/* Tablet responsive fixes */
+@media (max-width: 768px) {
+  .login-card {
+    max-width: 400px;
+  }
+  
+  .login-card .card-body {
+    padding: 1.75rem;
+  }
+}
+
+/* Desktop and larger screens */
+@media (min-width: 1200px) {
+  .login-card {
+    max-width: 500px;
+  }
+  
+  .login-card .card-body {
+    padding: 2.5rem;
+  }
+}
+
+/* Ensure proper centering on all devices */
+@media (max-width: 992px) {
+  .login-container .row {
+    margin: 0;
+  }
+  
+  .login-container .col {
+    padding: 0;
+  }
+}
+
+/* Fix for very small screens */
+@media (max-width: 375px) {
+  .login-card .card-body {
+    padding: 1rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  .form-control {
+    padding: 10px 12px;
+  }
+}
+
+/* Fix for full screen issues */
+@media (min-width: 1400px) {
+  .login-card {
+    max-width: 550px;
+  }
+}
+
+/* Ensure the container doesn't constrain the card */
+.container-fluid {
+  max-width: none;
+  padding-left: 15px;
+  padding-right: 15px;
+}
