@@ -24,9 +24,11 @@ def test_api_endpoints():
         return
 
     # Test 2: Test login endpoint
+    # Note: Replace with your actual super admin credentials
+    # Run 'python manage.py init_data' to create super admin account
     login_data = {
         "email": "admin@superadmin.com",
-        "password": "vwP@TI^kpJ8r"
+        "password": "YOUR_PASSWORD_HERE"  # Replace with actual password from init_data output
     }
 
     try:

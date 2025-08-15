@@ -1,0 +1,17 @@
+# Super Admin Dashboard - Requirements
+# 
+# This project uses a monorepo structure with separate requirements for backend and frontend.
+# 
+# Backend (Django) requirements are in: backend/requirements.txt
+# Frontend (React) dependencies are in: frontend/package.json
+#
+# To install backend dependencies:
+# cd backend && pip install -r requirements.txt
+#
+# To install frontend dependencies:
+# cd frontend && npm install
+#
+# For development setup, see README.md for complete instructions.
+
+# Core project dependencies (if any root-level packages are needed)
+# Currently all dependencies are in backend/requirements.txt

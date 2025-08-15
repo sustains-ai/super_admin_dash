@@ -120,10 +120,28 @@ Super_admin_dashboard/
 
 The backend will be available at `http://localhost:8000`
 
-### Super Admin Credentials
-After running `init_data`, you'll get super admin credentials:
-- **Email**: admin@superadmin.com
-- **Password**: [Auto-generated, shown in terminal]
+### For Examiners: Creating Your First Super Admin Account
+
+**Important**: This is an assignment submission. No default credentials are provided for security reasons.
+
+To create your first super admin account:
+
+1. **Run the initialization command**:
+   ```bash
+   cd backend
+   python manage.py init_data
+   ```
+
+2. **Check the terminal output** for the auto-generated super admin credentials:
+   ```
+   Super admin created successfully!
+   Email: admin@superadmin.com
+   Password: [auto-generated strong password]
+   ```
+
+3. **Use these credentials** to log in to the system
+
+**Note**: The password is auto-generated and will be different each time you run the initialization. Make sure to copy it from the terminal output.
 
 ### Frontend Setup (Coming Soon)
 ```bash

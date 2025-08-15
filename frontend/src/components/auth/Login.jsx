@@ -158,13 +158,7 @@ const Login = () => {
                   </div>
                 </Form>
                 
-                <div className="text-center mt-4">
-                  <small className="text-muted">
-                    Demo Credentials:<br />
-                    <strong>Email:</strong> admin@superadmin.com<br />
-                    <strong>Password:</strong> vwP@TI^kpJ8r
-                  </small>
-                </div>
+
               </Card.Body>
             </Card>
           </Col>
