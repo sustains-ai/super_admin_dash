@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { 
-  Container, Row, Col, Card, Table, Button, Badge, Alert, 
+import {
+  Container, Row, Col, Card, Table, Button, Badge, Alert,
   Modal, Form, Spinner, ButtonGroup, Dropdown
 } from 'react-bootstrap';
+import { useAuth } from '../../context/AuthContext';
 import './PermissionManagement.css';
 
 const PermissionManagement = () => {
@@ -16,7 +17,7 @@ const PermissionManagement = () => {
   // Modal states
   const [showBulkModal, setShowBulkModal] = useState(false);
   const [showUserModal, setShowUserModal] = useState(false);
-  
+
   // Form states
   const [selectedUser, setSelectedUser] = useState(null);
   const [selectedPage, setSelectedPage] = useState(null);
@@ -38,34 +39,22 @@ const PermissionManagement = () => {
   });
   const [submitting, setSubmitting] = useState(false);
 
+  const { authFetch } = useAuth();
+
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
     try {
-      const token = localStorage.getItem('access_token');
-      
-      // Fetch users, pages, and permissions in parallel
+      setLoading(true);
+      setError('');
+
+      // Fetch users, pages, and permissions in parallel using authFetch
       const [usersResponse, pagesResponse, permissionsResponse] = await Promise.all([
-        fetch('http://localhost:8000/api/users/', {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }),
-        fetch('http://localhost:8000/api/pages/', {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }),
-        fetch('http://localhost:8000/api/permissions/', {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        })
+        authFetch('http://localhost:8000/api/users/'),
+        authFetch('http://localhost:8000/api/pages/'),
+        authFetch('http://localhost:8000/api/permissions/')
       ]);
 
       if (usersResponse.ok && pagesResponse.ok && permissionsResponse.ok) {
@@ -108,16 +97,10 @@ const PermissionManagement = () => {
     const currentPermission = hasPermission(userId, pageName, permissionType);
     
     try {
-      const token = localStorage.getItem('access_token');
-      
       if (currentPermission) {
         // Remove permission
-        const response = await fetch(`http://localhost:8000/api/permissions/`, {
+        const response = await authFetch(`http://localhost:8000/api/permissions/`, {
           method: 'DELETE',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
           body: JSON.stringify({
             user: userId,
             page: pageName,
@@ -138,12 +121,8 @@ const PermissionManagement = () => {
         }
       } else {
         // Add permission
-        const response = await fetch('http://localhost:8000/api/permissions/', {
+        const response = await authFetch('http://localhost:8000/api/permissions/', {
           method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
           body: JSON.stringify({
             user: userId,
             page: pageName,
@@ -201,8 +180,6 @@ const PermissionManagement = () => {
 
     setSubmitting(true);
     try {
-      const token = localStorage.getItem('access_token');
-      
       // Create permissions for all selected combinations
       const promises = [];
       bulkPermissions.users.forEach(userId => {
@@ -210,12 +187,8 @@ const PermissionManagement = () => {
           Object.entries(bulkPermissions.permissions).forEach(([permType, enabled]) => {
             if (enabled) {
               promises.push(
-                fetch('http://localhost:8000/api/permissions/', {
+                authFetch('http://localhost:8000/api/permissions/', {
                   method: 'POST',
-                  headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                  },
                   body: JSON.stringify({
                     user: userId,
                     page: pageName,

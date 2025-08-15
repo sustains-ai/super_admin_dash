@@ -1,119 +1,420 @@
 .page-view-container {
   min-height: 100vh;
   background-color: #f8f9fa;
+  padding: 20px 0;
+  width: 100%;
 }
 
-.navbar {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.navbar-brand {
-  font-size: 1.5rem;
-}
-
-.card {
+.page-view-container .card {
   border: none;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease;
+  margin-bottom: 1.5rem;
+  width: 100%;
 }
 
-.card:hover {
+.page-view-container .card:hover {
   transform: translateY(-2px);
 }
 
-.card-header {
+.page-view-container .card-header {
   border-radius: 10px 10px 0 0 !important;
   border-bottom: none;
   font-weight: 600;
+  padding: 1rem 1.5rem;
 }
 
-.comment-card {
-  border-left: 4px solid #007bff;
-  transition: all 0.2s ease;
+.page-view-container .card-body {
+  padding: 1.5rem;
 }
 
-.comment-card:hover {
-  border-left-color: #0056b3;
-  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.1);
-}
-
-.permissions-info {
-  background-color: #f8f9fa;
-  padding: 15px;
-  border-radius: 8px;
-  border-left: 4px solid #28a745;
-}
-
-.permissions-info h6 {
-  margin-bottom: 10px;
-  color: #495057;
-  font-weight: 600;
-}
-
-.badge {
-  font-size: 0.75rem;
-  padding: 0.5em 0.75em;
-}
-
-.btn {
+.page-view-container .btn {
   border-radius: 6px;
   font-weight: 500;
   transition: all 0.2s ease;
+  white-space: nowrap;
+  padding: 0.5rem 1rem;
 }
 
-.btn:hover {
+.page-view-container .btn:hover {
   transform: translateY(-1px);
 }
 
-.btn-outline-danger:hover {
-  background-color: #dc3545;
-  border-color: #dc3545;
+.page-view-container .btn-group .btn {
+  margin-right: 0.25rem;
 }
 
-.form-control {
-  border-radius: 8px;
-  border: 1px solid #e1e5e9;
-  transition: all 0.3s ease;
+.page-view-container .btn-group .btn:last-child {
+  margin-right: 0;
 }
 
-.form-control:focus {
+.page-view-container .badge {
+  font-size: 0.75rem;
+  padding: 0.5em 0.75em;
+  display: inline-block;
+  margin: 0.125rem;
+}
+
+/* Comment styles */
+.comment-item {
+  border: none !important;
+  border-bottom: 1px solid #e9ecef !important;
+  padding: 1rem 0 !important;
+  transition: background-color 0.2s ease;
+}
+
+.comment-item:last-child {
+  border-bottom: none !important;
+}
+
+.comment-item:hover {
+  background-color: rgba(0, 123, 255, 0.05);
+}
+
+.comment-actions {
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+.comment-actions .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+.comment-history {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.comment-history .list-group-item {
+  border-left: 3px solid #007bff;
+  margin-bottom: 0.5rem;
+  border-radius: 0.375rem;
+}
+
+/* Modal styles */
+.page-view-container .modal-header {
+  border-bottom: 1px solid #dee2e6;
+  background-color: #f8f9fa;
+}
+
+.page-view-container .modal-footer {
+  border-top: 1px solid #dee2e6;
+  background-color: #f8f9fa;
+}
+
+.page-view-container .form-control:focus {
   border-color: #007bff;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
-.alert {
+/* 15" Laptop and larger screens */
+@media (min-width: 1366px) {
+  .page-view-container {
+    padding: 30px 0;
+  }
+  
+  .page-view-container .card {
+    margin-bottom: 2rem;
+  }
+  
+  .page-view-container .card-body {
+    padding: 2rem;
+  }
+  
+  .page-view-container .btn {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+  }
+  
+  .comment-item {
+    padding: 1.25rem 0 !important;
+  }
+  
+  .comment-actions .btn {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Large desktop screens */
+@media (min-width: 1920px) {
+  .page-view-container .card-body {
+    padding: 2.5rem;
+  }
+  
+  .page-view-container .btn {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+  }
+  
+  .comment-item {
+    padding: 1.5rem 0 !important;
+  }
+  
+  .comment-actions .btn {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+}
+
+/* Medium screens (tablets) */
+@media (max-width: 1024px) {
+  .page-view-container .card-body {
+    padding: 1.25rem;
+  }
+  
+  .page-view-container .btn {
+    font-size: 0.875rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .comment-item {
+    padding: 0.75rem 0 !important;
+  }
+  
+  .comment-actions .btn {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Mobile responsive fixes */
+@media (max-width: 768px) {
+  .page-view-container {
+    padding: 15px 0;
+  }
+  
+  .page-view-container .btn {
+    font-size: 0.75rem;
+    padding: 0.375rem 0.75rem;
+  }
+  
+  .page-view-container .btn-group {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .page-view-container .btn-group .btn {
+    margin-bottom: 0.25rem;
+    margin-right: 0;
+  }
+  
+  .page-view-container .card-body {
+    padding: 1rem;
+  }
+  
+  .comment-item {
+    padding: 0.75rem 0 !important;
+  }
+  
+  .comment-actions {
+    margin-left: 0.5rem;
+  }
+  
+  .comment-actions .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  
+  .comment-actions .btn-group {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .comment-actions .btn-group .btn {
+    margin-bottom: 0.125rem;
+    margin-right: 0.125rem;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 576px) {
+  .page-view-container .btn {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+  }
+  
+  .page-view-container .card-header h5 {
+    font-size: 1rem;
+  }
+  
+  .page-view-container .card-body {
+    padding: 0.75rem;
+  }
+  
+  .comment-item {
+    padding: 0.5rem 0 !important;
+  }
+  
+  .comment-actions .btn {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.7rem;
+  }
+  
+  .comment-actions .btn-group {
+    flex-direction: column;
+  }
+  
+  .comment-actions .btn-group .btn {
+    margin-bottom: 0.125rem;
+    margin-right: 0;
+  }
+}
+
+/* Better spacing for mobile */
+@media (max-width: 768px) {
+  .page-view-container .mt-4 {
+    margin-top: 1rem !important;
+  }
+  
+  .page-view-container .mb-4 {
+    margin-bottom: 1rem !important;
+  }
+  
+  .page-view-container .mb-2 {
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .page-view-container .me-2 {
+    margin-right: 0.5rem !important;
+  }
+  
+  .page-view-container .card {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Fix for long screens - prevent excessive stretching */
+@media (min-height: 900px) {
+  .page-view-container {
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+}
+
+/* Custom scrollbar for comment history */
+.comment-history::-webkit-scrollbar {
+  width: 8px;
+}
+
+.comment-history::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.comment-history::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.comment-history::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Form styling */
+.page-view-container .form-control {
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.page-view-container .form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Alert styling */
+.page-view-container .alert {
   border-radius: 8px;
   border: none;
+  margin-bottom: 1rem;
 }
 
-.shadow-sm {
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+/* List group styling */
+.page-view-container .list-group-item {
+  border: none;
+  background-color: transparent;
 }
 
-.navbar-text {
-  color: rgba(255, 255, 255, 0.8) !important;
+.page-view-container .list-group-item:first-child {
+  border-top: none;
 }
 
-.comments-section {
-  max-height: 500px;
-  overflow-y: auto;
+.page-view-container .list-group-item:last-child {
+  border-bottom: none;
 }
 
-.comments-section::-webkit-scrollbar {
-  width: 6px;
+/* Icon styling */
+.page-view-container .fa-icon {
+  margin-right: 0.5rem;
 }
 
-.comments-section::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 3px;
+/* Permission badges spacing */
+.page-view-container .badge + .badge {
+  margin-left: 0.25rem;
 }
 
-.comments-section::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 3px;
+/* Comment content styling */
+.comment-item p {
+  line-height: 1.6;
+  margin-bottom: 0;
+  word-wrap: break-word;
 }
 
-.comments-section::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
+/* User info styling */
+.comment-item strong {
+  color: #495057;
+  font-weight: 600;
+}
+
+.comment-item small {
+  color: #6c757d;
+  font-size: 0.875rem;
+}
+
+/* Modified badge styling */
+.badge.bg-warning {
+  color: #212529;
+  font-size: 0.65rem;
+  padding: 0.25em 0.5em;
+}
+
+/* Responsive text sizing */
+@media (max-width: 768px) {
+  .page-view-container h2 {
+    font-size: 1.5rem;
+  }
+  
+  .page-view-container h5 {
+    font-size: 1.1rem;
+  }
+  
+  .comment-item strong {
+    font-size: 0.9rem;
+  }
+  
+  .comment-item small {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-view-container h2 {
+    font-size: 1.25rem;
+  }
+  
+  .page-view-container h5 {
+    font-size: 1rem;
+  }
+  
+  .comment-item strong {
+    font-size: 0.85rem;
+  }
+  
+  .comment-item small {
+    font-size: 0.75rem;
+  }
 }

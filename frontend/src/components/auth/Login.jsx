@@ -1,140 +1,175 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card, Form, Button, Alert } from 'react-bootstrap';
-import AuthContext from '../../context/AuthContext';
+import { Container, Row, Col, Card, Form, Button, Alert, Spinner } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faUser, faLock, faSignInAlt, faEye, faEyeSlash, 
+  faKey, faArrowLeft
+} from '@fortawesome/free-solid-svg-icons';
+import { useAuth } from '../../context/AuthContext';
+import PasswordRecovery from './PasswordRecovery';
 import './Login.css';
 
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showPasswordRecovery, setShowPasswordRecovery] = useState(false);
   
-  const { login } = useContext(AuthContext);
+  const { login } = useAuth();
   const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!email.trim() || !password.trim()) {
+      setError('Please enter both email and password');
+      return;
+    }
+
     setLoading(true);
     setError('');
     
-    console.log('Attempting login with:', formData);
-
     try {
       const response = await fetch('http://localhost:8000/api/auth/login/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          email: email.trim(),
+          password: password,
+        }),
       });
 
-      console.log('Response status:', response.status);
-      const data = await response.json();
-      console.log('Response data:', data);
-
       if (response.ok) {
-        console.log('Login successful, calling login function...');
+        const data = await response.json();
         login(data.user, {
           access_token: data.access_token,
-          refresh_token: data.refresh_token
+          refresh_token: data.refresh_token,
         });
-        
-        console.log('Login function called, navigating...');
-        // Redirect based on user role
-        if (data.user.role === 'super_admin') {
-          navigate('/dashboard');
-        } else {
-          // For regular users, redirect to their first accessible page
-          navigate('/page/products_list');
-        }
+        // Redirect to dashboard after successful login
+        navigate('/dashboard');
       } else {
-        console.log('Login failed:', data);
-        setError(data.error || 'Login failed. Please check your credentials.');
+        const errorData = await response.json();
+        setError(errorData.error || 'Login failed. Please check your credentials.');
       }
     } catch (err) {
-      console.error('Network error:', err);
       setError('Network error. Please check your connection.');
     } finally {
       setLoading(false);
     }
   };
 
+  if (showPasswordRecovery) {
+    return (
+      <PasswordRecovery onBackToLogin={() => setShowPasswordRecovery(false)} />
+    );
+  }
+
   return (
     <div className="login-container">
-      <Card className="login-card shadow">
-        <Card.Body className="p-5">
-          <div className="text-center mb-4">
-            <h2 className="fw-bold text-primary">Super Admin Dashboard</h2>
-            <p className="text-muted">Sign in to your account</p>
-          </div>
+      <Container>
+        <Row className="justify-content-center">
+          <Col md={6} lg={5} xl={4}>
+            <Card className="shadow-lg">
+              <Card.Header className="bg-primary text-white text-center">
+                <h4 className="mb-0">
+                  <FontAwesomeIcon icon={faSignInAlt} className="me-2" />
+                  Super Admin Dashboard
+                </h4>
+              </Card.Header>
+              <Card.Body className="p-4">
+                {error && (
+                  <Alert variant="danger" dismissible onClose={() => setError('')}>
+                    {error}
+                  </Alert>
+                )}
 
-          {error && (
-            <Alert variant="danger" dismissible onClose={() => setError('')}>
-              {error}
-            </Alert>
-          )}
-
-          <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3">
-              <Form.Label>Email Address</Form.Label>
-              <Form.Control
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Enter your email"
-                required
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-4">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="Enter your password"
-                required
-              />
-            </Form.Group>
-
-            <Button
-              variant="primary"
-              type="submit"
-              className="w-100 mb-3"
-              disabled={loading}
-            >
-              {loading ? (
-                <>
-                  <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                  Signing In...
-                </>
-              ) : (
-                'Sign In'
-              )}
-            </Button>
-          </Form>
-
-          <div className="text-center">
-            <small className="text-muted">
-              Demo Credentials:<br />
-              <strong>Super Admin:</strong> admin@superadmin.com<br />
-              <strong>Password:</strong> vwP@TI^kpJ8r
-            </small>
-          </div>
-        </Card.Body>
-      </Card>
+                <div className="text-center mb-4">
+                  <FontAwesomeIcon icon={faUser} size="3x" className="text-primary mb-3" />
+                  <h5>Welcome Back</h5>
+                  <p className="text-muted">
+                    Sign in to access your dashboard
+                  </p>
+                </div>
+                
+                <Form onSubmit={handleSubmit}>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Email Address</Form.Label>
+                    <Form.Control
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Enter your email"
+                      required
+                    />
+                  </Form.Group>
+                  
+                  <Form.Group className="mb-3">
+                    <Form.Label>Password</Form.Label>
+                    <div className="input-group">
+                      <Form.Control
+                        type={showPassword ? "text" : "password"}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter your password"
+                        required
+                      />
+                      <Button
+                        variant="outline-secondary"
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                      </Button>
+                    </div>
+                  </Form.Group>
+                  
+                  <div className="d-grid gap-2">
+                    <Button 
+                      type="submit" 
+                      variant="primary" 
+                      disabled={loading}
+                      className="mb-2"
+                    >
+                      {loading ? (
+                        <>
+                          <Spinner animation="border" size="sm" className="me-2" />
+                          Signing In...
+                        </>
+                      ) : (
+                        <>
+                          <FontAwesomeIcon icon={faSignInAlt} className="me-2" />
+                          Sign In
+                        </>
+                      )}
+                    </Button>
+                    <Button 
+                      variant="link" 
+                      onClick={() => setShowPasswordRecovery(true)}
+                      className="text-decoration-none"
+                    >
+                      <FontAwesomeIcon icon={faKey} className="me-2" />
+                      Forgot Password?
+                    </Button>
+                  </div>
+                </Form>
+                
+                <div className="text-center mt-4">
+                  <small className="text-muted">
+                    Demo Credentials:<br />
+                    <strong>Email:</strong> admin@superadmin.com<br />
+                    <strong>Password:</strong> vwP@TI^kpJ8r
+                  </small>
+                </div>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 };

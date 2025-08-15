@@ -1,9 +1,19 @@
-import { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
-import AuthContext from '../../context/AuthContext';
+import { Spinner } from 'react-bootstrap';
+import { useAuth } from '../../context/AuthContext';
 
 const ProtectedRoute = ({ children }) => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </div>
+    );
+  }
 
   if (!user) {
     return <Navigate to="/login" replace />;
